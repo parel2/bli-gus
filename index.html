@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warung BLI GUS - UMKM Makanan & Minuman</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header - EDIT LOGO DI SINI */
+        .header {
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            min-height: 80px;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+        }
+
+        .header-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            object-fit: cover;
+            background: #ffffff;
+        }
+
+        .header-brand {
+            background: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEin5hHYN0bmygrH6S1z1VRLgkFkYBa1g4kul7GEfn6YBSYuSSWxlooGD3jZTjn1fxo0j3mWHPoBIuxoS7D3Fravi3GlC-HvqVfONunLpouHrY7CJqngkb9NCqRHrM15BZi8h2Yg4MoQfbnuOH1rSqWqGAiyLv-qMKaGrocD7mp1wT598je46L0ehaI4Ltg/s1600/8dcc11c1-2244-4f3c-a719-899ef19eba1c-removebg-preview.png') no-repeat center;
+            background-size: contain;
+            height: 50px;
+            width: 200px;
+            flex: 1;
+        }
+
+        .header h1 {
+            display: none;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: linear-gradient(135deg, #333333, #555555);
+            color: #ffffff;
+            border: 2px solid transparent;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            background: linear-gradient(135deg, #555555, #777777);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin: 40px 0;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #333333, #555555);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .menu-card {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+            border-color: #ffffff;
+        }
+
+        .menu-card-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #333333, #555555);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #666666;
+        }
+
+        .menu-card-content {
+            padding: 12px;
+        }
+
+        .menu-card h3 {
+            color: #ffffff;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .menu-description {
+            color: #cccccc;
+            font-size: 0.8rem;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .menu-price {
+            color: #4CAF50;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            color: #000000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 0.85rem;
+        }
+
+        .add-to-cart:hover {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            transform: scale(1.02);
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(255,255,255,0.2);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .close {
+            color: #ffffff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #ff4444;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .qty-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        .remove-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #cc3333;
+        }
+
+        /* Form */
+        .order-form {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffffff;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #cccccc;
+        }
+
+        .total-section {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #4CAF50;
+        }
+
+        .total-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .send-order {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .send-order:hover {
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+            transform: scale(1.02);
+        }
+
+        .send-order:disabled {
+            background: #666666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 10px 0;
+                min-height: 70px;
+            }
+
+            .header-logo {
+                width: 45px;
+                height: 45px;
+                border-width: 2px;
+            }
+
+            .header-brand {
+                height: 35px;
+                width: 150px;
+            }
+
+            .header .container {
+                gap: 10px;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .menu-card-image {
+                height: 100px;
+                font-size: 1.5rem;
+            }
+
+            .menu-card-content {
+                padding: 10px;
+            }
+
+            .menu-card h3 {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+            }
+
+            .menu-description {
+                font-size: 0.75rem;
+                margin-bottom: 6px;
+            }
+
+            .menu-price {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+
+            .add-to-cart {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+
+            .cart-icon {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .filter-buttons {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #cccccc;
+        }
+
+        .empty-cart-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <!-- Logo Lingkaran - EDIT URL LOGO DI SINI -->
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi8JFS02xZQduLzcmvheLCT8PIyUsFx6bXr6hHPGyqflRzDy_Z8Fye0_1ElXenhb9LanddXmHeD-pTNCKNHbRxdtijrFzqxeFf3p8hNM0DxDpktfdlXmffeW8nb-vKPbGrAlG3nac5sagYKaWm9iA87FQY4qzF8Hc4jWV9rSgkbMg_Bhyphenhyphen988OuqzHa8pHk/s1600/a8124ec7-046d-46fe-ba58-446b309e89a2.jpg" 
+                 alt="Logo Warung BLI GUS" class="header-logo">
+            
+            <!-- Brand Image - EDIT URL BRAND DI SINI -->
+            <div class="header-brand"></div>
+            
+            <!-- Fallback text (hidden) -->
+            <h1>🍽️ WARUNG BLI GUS</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Tombol Filter Kategori - EDIT DI SINI UNTUK MENAMBAH KATEGORI BARU -->
+        <div class="category-filter">
+            <div class="filter-buttons">
+                <button class="filter-btn active" onclick="filterMenu('all')">🍽️ Semua Menu</button>
+                <button class="filter-btn" onclick="filterMenu('cemilan')">🍗 Cemilan</button>
+                <button class="filter-btn" onclick="filterMenu('minuman')">🥤 Minuman</button>
+                <button class="filter-btn" onclick="filterMenu('jus')">🍹 Jus Buah</button>
+                <button class="filter-btn" onclick="filterMenu('kopi')">☕ Kopi</button>
+                <button class="filter-btn" onclick="filterMenu('rujak')">🥗 Rujak</button>
+                <button class="filter-btn" onclick="filterMenu('tipat')">🌿 Tipat</button>
+                <button class="filter-btn" onclick="filterMenu('sayur')">🌱 Sayur</button>
+                <button class="filter-btn" onclick="filterMenu('mie')">🍜 Mie</button>
+                <button class="filter-btn" onclick="filterMenu('nasi')">🍚 Nasi</button>
+                <button class="filter-btn" onclick="filterMenu('ayam')">🍗 Ayam</button>
+                <button class="filter-btn" onclick="filterMenu('paket')">🍗 Paket</button>
+                <!-- TAMBAH TOMBOL KATEGORI BARU DI SINI -->
+                <!-- Contoh: <button class="filter-btn" onclick="filterMenu('dessert')">🧁 Dessert</button> -->
+            </div>
+        </div>
+
+        <!-- All Menu Items (Filtered) -->
+        <div class="menu-grid" id="allMenuGrid">
+            <!-- All menu items will be populated by JavaScript -->
+        </div>
+
+        <!-- Cemilan -->
+        <section class="category-section" id="cemilan-section">
+            <h2 class="category-title">🍗 CEMILAN</h2>
+            <div class="menu-grid" id="cemilan-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Minuman -->
+        <section class="category-section" id="minuman-section">
+            <h2 class="category-title">🥤 MINUMAN</h2>
+            <div class="menu-grid" id="minuman-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Jus Buah -->
+        <section class="category-section" id="jus-section">
+            <h2 class="category-title">🍹 JUS BUAH</h2>
+            <div class="menu-grid" id="jus-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Kopi -->
+        <section class="category-section" id="kopi-section">
+            <h2 class="category-title">☕ KOPI</h2>
+            <div class="menu-grid" id="kopi-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Rujak -->
+        <section class="category-section" id="rujak-section">
+            <h2 class="category-title">🥗 RUJAK</h2>
+            <div class="menu-grid" id="rujak-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Tipat -->
+        <section class="category-section" id="tipat-section">
+            <h2 class="category-title">🌿 TIPAT</h2>
+            <div class="menu-grid" id="tipat-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Sayur -->
+        <section class="category-section" id="sayur-section">
+            <h2 class="category-title">🌱 SAYUR</h2>
+            <div class="menu-grid" id="sayur-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Mie Instan -->
+        <section class="category-section" id="mie-section">
+            <h2 class="category-title">🍜 MIE INSTAN</h2>
+            <div class="menu-grid" id="mie-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Nasi -->
+        <section class="category-section" id="nasi-section">
+            <h2 class="category-title">🍚 NASI</h2>
+            <div class="menu-grid" id="nasi-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Ayam & Sayuran -->
+        <section class="category-section" id="ayam-section">
+            <h2 class="category-title">🍗 AYAM & SAYURAN</h2>
+            <div class="menu-grid" id="ayam-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Paket Ayam -->
+        <section class="category-section" id="paket-section">
+            <h2 class="category-title">🍗 PAKET AYAM</h2>
+            <div class="menu-grid" id="paket-grid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Icon -->
+    <button class="cart-icon" id="cartIcon" onclick="openCart()">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>🛒 Keranjang Belanja</h2>
+            
+            <div id="cartItems">
+                <!-- Cart items will be populated by JavaScript -->
+            </div>
+
+            <div class="total-section">
+                <div class="total-amount">
+                    Total: Rp <span id="totalAmount">0</span>
+                </div>
+            </div>
+
+            <div class="order-form">
+                <h3>📝 Data Pemesanan</h3>
+                <div class="form-group">
+                    <label for="customerName">Nama Pelanggan *</label>
+                    <input type="text" id="customerName" placeholder="Masukkan nama Anda" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pickupTime">Jam Ngambil *</label>
+                    <input type="time" id="pickupTime" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="additionalNotes">Pesan Tambahan (Opsional)</label>
+                    <textarea id="additionalNotes" rows="3" placeholder="Catatan khusus untuk pesanan Anda"></textarea>
+                </div>
+                
+                <button class="send-order" onclick="sendToWhatsApp()">
+                    📱 Kirim Pesanan ke WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ==========================================
+           PANDUAN EDIT KODE UNTUK PEMULA
+           ==========================================
+           
+           1. MENGGANTI NOMOR WHATSAPP:
+              - Cari baris: const whatsappNumber = '6281234567890';
+              - Ganti nomor dengan nomor WhatsApp Anda (tanpa tanda +)
+              
+           2. MENAMBAH MENU BARU:
+              - Cari bagian "menuData" di bawah
+              - Pilih kategori yang sesuai (cemilan, minuman, jus, dll)
+              - Tambahkan item baru dengan format:
+                { name: "Nama Menu", price: 15000, image: "URL_GAMBAR" }
+              - Jangan lupa tambahkan koma (,) setelah item sebelumnya
+              
+           3. MENGGANTI LOGO DAN BRAND:
+              - Logo Lingkaran: Cari "<!-- Logo Lingkaran - EDIT URL LOGO DI SINI -->"
+              - Brand Image: Cari ".header-brand" di bagian CSS, ganti URL gambar
+              - Pastikan logo lingkaran ukuran persegi (sama tinggi dan lebar)
+              
+           4. MENGUBAH WARNA TEMA:
+              - Cari bagian CSS di atas (antara tag <style>)
+              - Ubah kode warna seperti #1a1a1a (hitam) atau #ffffff (putih)
+              
+           5. MENAMBAH KATEGORI BARU:
+              - Tambahkan data di menuData
+              - Tambahkan tombol filter di HTML
+              - Tambahkan section kategori di HTML
+              
+           PERINGATAN: Backup file ini sebelum mengedit!
+           ==========================================
+        */
+
+        // Data Menu - EDIT DI SINI UNTUK MENAMBAH/UBAH MENU
+        const menuData = {
+            // KATEGORI CEMILAN - Contoh cara menambah item baru:
+            // { name: "Nama Menu Baru", price: 15000, image: "URL_GAMBAR" },
+            Toping : [ 
+              { name: "Telur Rebus (Topping)", price: 3000, image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+                { name: "Telur Ceplok (Topping)", price: 3000, image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+                { name: "Telur Dadar (Topping)", price: 3000, image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" }
+            ],
+            cemilan: [
+                { name: "Chicken Nugget", price: 13000, image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=400&h=300&fit=crop" },
+                { name: "Sosis Bakar Ori", price: 10000, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop" },
+                { name: "Sosis Bakar BBQ", price: 13000, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop" },
+                { name: "Kentang Goreng", price: 10000, image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop" },
+                { name: "Kentang Goreng Balado", price: 13000, image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop" }
+                // TAMBAHKAN MENU CEMILAN BARU DI SINI (jangan lupa koma di atas)
+            ],
+            minuman: [
+                { name: "Es Nutri Sari Jeruk", price: 3000, image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400&h=300&fit=crop" },
+                { name: "Es Teh", price: 5000, image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop" },
+                { name: "Pop Ice Coklat", price: 5000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Es Gula", price: 5000, image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop" },
+                { name: "Es Campur", price: 5000, image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=400&h=300&fit=crop" },
+                { name: "Es Daluman", price: 5000, image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=400&h=300&fit=crop" },
+                { name: "Es Jeruk", price: 5000, image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400&h=300&fit=crop" },
+                { name: "Es Susu", price: 5000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Es Jos", price: 5000, image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=400&h=300&fit=crop" },
+                { name: "Es Jos Susu", price: 7000, image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=400&h=300&fit=crop" },
+                { name: "Jeruk Hangat", price: 7000, image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400&h=300&fit=crop" },
+                { name: "Es Teh Tarik", price: 8000, image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop" },
+                { name: "Es Lemon Tea", price: 8000, image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop" },
+                { name: "Es Buah", price: 8000, image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=400&h=300&fit=crop" },
+                { name: "Capcin Cappucino", price: 8000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Capcin Choco Caramel", price: 8000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Capcin Choco Milo", price: 8000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Capcin Choco Oreo", price: 8000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Capcin Green Tea", price: 8000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Capcin Hazelnut", price: 8000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Soda Gembira", price: 12000, image: "https://images.unsplash.com/photo-1546173159-315724a31696?w=400&h=300&fit=crop" }
+            ],
+            jus: [
+                { name: "Jus Pepaya", price: 10000, image: "https://images.unsplash.com/photo-1605027990121-3b2c6c8b5c4e?w=400&h=300&fit=crop" },
+                { name: "Jus Jeruk", price: 10000, image: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop" },
+                { name: "Jus Semangka", price: 10000, image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=300&fit=crop" },
+                { name: "Jus Melon", price: 10000, image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=300&fit=crop" },
+                { name: "Jus Wortel", price: 12000, image: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=300&fit=crop" },
+                { name: "Jus Naga", price: 13000, image: "https://images.unsplash.com/photo-1605027990121-3b2c6c8b5c4e?w=400&h=300&fit=crop" },
+                { name: "Jus Alpukat", price: 13000, image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop" }
+            ],
+            kopi: [
+                { name: "Kopi Hitam", price: 5000, image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop" },
+                { name: "Kopi Susu", price: 5000, image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop" },
+                { name: "Luwak", price: 5000, image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop" },
+                { name: "Cappucino", price: 7000, image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop" }
+            ],
+            rujak: [
+                { name: "Rujak Gula Bali", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Gula Pasir", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Cuka", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Cuka Gula Bali", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Cuka Gula Pasir", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Kuah Pindang", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Kuah Pindang Gula Bali", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Kuah Pindang Gula Pasir", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Bulung Ijo / Putih", price: 10000, image: "https://images.unsplash.com/photo-1564093497595-593b96d80180?w=400&h=300&fit=crop" },
+                { name: "Rujak Colek Gula Bali", price: 10000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Colek Gula Pasir", price: 10000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Rujak Kacang", price: 12000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Khusus Buah Serut", price: 12000, image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=300&fit=crop" }
+            ],
+            tipat: [
+                { name: "Tipat Cantok", price: 8000, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop" },
+                { name: "Tipat Plecing Tomat", price: 10000, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" },
+                { name: "Tipat Plecing Tlengis", price: 8000, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" },
+                { name: "Tipat Bulung Kuah Pindang", price: 12000, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop" },
+                { name: "Tahu Tipat", price: 12000, image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+                { name: "Tipat Sayur", price: 12000, image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" }
+            ],
+            sayur: [
+                { name: "Sayur Cantok", price: 8000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Sayur Plecing Tomat", price: 10000, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" },
+                { name: "Sayur Plecing Tlengis", price: 8000, image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" },
+               
+            ],
+            mie: [
+                { name: "Mie Goreng / Soto / Kari", price: 6000, image: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&h=300&fit=crop" },
+                { name: "Mie + Telur", price: 9000, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" },
+                { name: "Mie + Tipat", price: 9000, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" },
+                { name: "Mie Komplit", price: 13000, image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400&h=300&fit=crop" }
+            ],
+            nasi: [
+                { name: "Nasi Putih", price: 5000, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop" },
+                { name: "Nasi Goreng Ayam", price: 15000, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop" },
+                { name: "Nasi Goreng Sosis", price: 15000, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop" },
+                { name: "Nasi Goreng Mix", price: 17000, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop" }
+            ],
+            ayam: [
+                { name: "Ayam Paha Goreng", price: 17000, image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=400&h=300&fit=crop" },
+                { name: "Ayam Paha Bakar", price: 20000, image: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=300&fit=crop" },
+                { name: "Tempe Tahu", price: 12000, image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" },
+                { name: "Ayam Asam Manis", price: 25000, image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=400&h=300&fit=crop" },
+                { name: "Ayam Asam Pedas", price: 25000, image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop" },
+                { name: "Ayam Goreng Saus Tiram", price: 25000, image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=400&h=300&fit=crop" },
+                { name: "Ayam Goreng Sayur", price: 25000, image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=400&h=300&fit=crop" },
+                { name: "Kwetiau Goreng", price: 19000, image: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&h=300&fit=crop" },
+                { name: "Mie Goreng", price: 17000, image: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&h=300&fit=crop" },
+                { name: "Capcay", price: 15000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Sayur Hijau", price: 15000, image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&h=300&fit=crop" },
+                { name: "Fuyung Hay", price: 18000, image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" }
+            ],
+            paket: [
+                { name: "Paket Bli Gus (BG 1)", price: 32000, image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=300&fit=crop", description: "Ayam Goreng, Tempe, Tahu, Terong, Nasi Putih + Es Teh + Plecing" },
+                { name: "Paket Bli Gus (BG 2)", price: 35000, image: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=300&fit=crop", description: "Ayam Bakar, Tempe, Tahu, Terong, Nasi Putih + Es Teh + Plecing" }
+            ]
+        };
+
+        // Cart functionality
+        let cart = [];
+
+        // Current filter
+        let currentFilter = 'all';
+
+        // Initialize menu display
+        function initializeMenu() {
+            // Hide all category sections initially
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show filtered menu
+            filterMenu('all');
+        }
+
+        // Create menu card HTML
+        function createMenuCard(item, category) {
+            const description = item.description ? `<div class="menu-description">${item.description}</div>` : '';
+            return `
+                <div class="menu-card" data-category="${category}">
+                    <img src="${item.image}" alt="${item.name}" class="menu-card-image" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="menu-card-image" style="display:none;">🍽️</div>
+                    <div class="menu-card-content">
+                        <h3>${item.name}</h3>
+                        ${description}
+                        <div class="menu-price">Rp ${formatPrice(item.price)}</div>
+                        <button class="add-to-cart" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price}, this)">
+                            Tambah ke Keranjang
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Filter menu by category
+        function filterMenu(category) {
+            currentFilter = category;
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Find and activate the clicked button
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                if (btn.getAttribute('onclick') === `filterMenu('${category}')`) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            const allMenuGrid = document.getElementById('allMenuGrid');
+            const categorySections = document.querySelectorAll('.category-section');
+            
+            if (category === 'all') {
+                // Show all items in the filtered grid
+                let allItems = '';
+                Object.keys(menuData).forEach(cat => {
+                    menuData[cat].forEach(item => {
+                        allItems += createMenuCard(item, cat);
+                    });
+                });
+                allMenuGrid.innerHTML = allItems;
+                allMenuGrid.style.display = 'grid';
+                categorySections.forEach(section => section.style.display = 'none');
+            } else {
+                // Show specific category
+                allMenuGrid.style.display = 'none';
+                categorySections.forEach(section => section.style.display = 'none');
+                
+                if (menuData[category]) {
+                    const categoryGrid = document.getElementById(`${category}-grid`);
+                    const categorySection = document.getElementById(`${category}-section`);
+                    if (categoryGrid && categorySection) {
+                        categoryGrid.innerHTML = menuData[category].map(item => createMenuCard(item, category)).join('');
+                        categorySection.style.display = 'block';
+                    }
+                }
+            }
+        }
+
+        // Format price to Indonesian format
+        function formatPrice(price) {
+            return price.toLocaleString('id-ID');
+        }
+
+        // Add item to cart
+        function addToCart(name, price, buttonElement) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            
+            // Visual feedback - find the button that was clicked
+            const button = buttonElement || document.querySelector(`button[onclick*="${name}"]`);
+            if (button) {
+                const originalText = button.textContent;
+                const originalStyle = button.style.cssText;
+                
+                button.textContent = "✓ Ditambahkan!";
+                button.style.background = "#4CAF50";
+                button.style.color = "white";
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.cssText = originalStyle;
+                }, 1000);
+            }
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cartCount');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+
+        // Open cart modal
+        function openCart() {
+            const modal = document.getElementById('cartModal');
+            const cartItems = document.getElementById('cartItems');
+            const totalAmount = document.getElementById('totalAmount');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <h3>Keranjang Kosong</h3>
+                        <p>Belum ada item yang ditambahkan ke keranjang</p>
+                    </div>
+                `;
+                totalAmount.textContent = '0';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <strong>${item.name}</strong><br>
+                            <span style="color: #4CAF50;">Rp ${formatPrice(item.price)} x ${item.quantity}</span>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="qty-btn" onclick="changeQuantity('${item.name}', -1)">-</button>
+                            <span style="margin: 0 10px; font-weight: bold;">${item.quantity}</span>
+                            <button class="qty-btn" onclick="changeQuantity('${item.name}', 1)">+</button>
+                            <button class="remove-btn" onclick="removeFromCart('${item.name}')">Hapus</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                totalAmount.textContent = formatPrice(total);
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        // Close cart modal
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // Change item quantity
+        function changeQuantity(name, change) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(name);
+                } else {
+                    updateCartDisplay();
+                    openCart(); // Refresh the cart display
+                }
+            }
+        }
+
+        // Remove item from cart
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCartDisplay();
+            openCart(); // Refresh the cart display
+        }
+
+        // Send order to WhatsApp
+        function sendToWhatsApp() {
+            const customerName = document.getElementById('customerName').value.trim();
+            const pickupTime = document.getElementById('pickupTime').value;
+            const additionalNotes = document.getElementById('additionalNotes').value.trim();
+            
+            // Validation
+            if (!customerName) {
+                alert('Nama pelanggan harus diisi!');
+                return;
+            }
+            
+            if (!pickupTime) {
+                alert('Jam ngambil harus diisi!');
+                return;
+            }
+            
+            if (cart.length === 0) {
+                alert('Keranjang belanja kosong!');
+                return;
+            }
+            
+            // Create message
+            let message = `*PESANAN WARUNG BLI GUS*\n\n`;
+            message += `Nama: ${customerName}\n`;
+            message += `Jam Ngambil: ${pickupTime}\n\n`;
+            message += `*Pesanan:*\n`;
+            
+            cart.forEach(item => {
+                const subtotal = item.price * item.quantity;
+                message += `- ${item.name} x ${item.quantity} = Rp ${formatPrice(subtotal)}\n`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `\n*Total: Rp ${formatPrice(total)}*\n`;
+            
+            if (additionalNotes) {
+                message += `\nPesan Tambahan: ${additionalNotes}\n`;
+            }
+            
+            message += `\nTerima kasih telah memesan di Warung BLI GUS! 🙏`;
+            
+            // EDIT NOMOR WHATSAPP DI SINI - Ganti dengan nomor WhatsApp warung Anda
+            // Format: 62 (kode Indonesia) + nomor tanpa 0 di depan
+            // Contoh: 081234567890 menjadi 6281234567890
+            const whatsappNumber = '6281234567890'; // <-- GANTI NOMOR INI
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Clear cart and form after sending
+            cart = [];
+            updateCartDisplay();
+            document.getElementById('customerName').value = '';
+            document.getElementById('pickupTime').value = '';
+            document.getElementById('additionalNotes').value = '';
+            closeCart();
+            
+            alert('Pesanan berhasil dikirim ke WhatsApp! Terima kasih telah memesan.');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                closeCart();
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMenu();
+            updateCartDisplay();
+        });
+    </script>
+</body>
+</html>
